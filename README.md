@@ -1,5 +1,12 @@
 # Getting Started with Create React App
 
+## Install lib list
+```shell
+npm i react-leaflet
+npm i leaflet
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
