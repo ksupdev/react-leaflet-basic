@@ -1,6 +1,7 @@
 //rafce
 import React from 'react'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import BaseMap from './layer/BaseMap'
 
 const MapContent = () => {
     return (
@@ -17,6 +18,7 @@ const MapContent = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <BaseMap />
             </MapContainer>
         </div>
     )
