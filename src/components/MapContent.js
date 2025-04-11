@@ -1,8 +1,9 @@
 //rafce
-import React from 'react'
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import React, { useState } from 'react'
+import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
 import BaseMap from './layer/BaseMap'
 import CSVFilelocal from './layer/CSVFilelocal'
+import AircraftCSV from './layer/AircraftCSV'
 
 import L from 'leaflet';
 
@@ -19,8 +20,12 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapContent = () => {
+    const [aircraft, setAircraft] = useState(null);
+    console.log('Hello', aircraft);
+
     return (
         <div>
+            <AircraftCSV setAircraft={setAircraft} />
             <MapContainer
                 style={{
                     width: '100%',
@@ -35,6 +40,7 @@ const MapContent = () => {
                 />
                 <BaseMap />
                 <CSVFilelocal />
+                {aircraft && aircraft.map((item, index) => <Marker key={index} position={[item.latitude, item.longitude]}></Marker>)}
             </MapContainer>
         </div>
     )
