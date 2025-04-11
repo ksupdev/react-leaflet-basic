@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
-import { Marker } from 'react-leaflet';
+import { Marker, Popup } from 'react-leaflet';
+import './style.css'
 
 
 const CSVFilelocal = () => {
@@ -24,10 +25,16 @@ const CSVFilelocal = () => {
 
     // console.log(data);
 
-    return data ? data.map((item,index) =>
+    return data ? data.map((item, index) =>
         <Marker key={index} position={
             [item.lat, item.long]
         }>
+            <Popup className='my-popup'>
+                <h2>
+                    {item["Name Thai"]}
+                </h2>
+                <img src={item["Image URL"]} />
+            </Popup>
 
         </Marker>) : null;
 }
