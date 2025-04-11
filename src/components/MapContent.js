@@ -2,6 +2,21 @@
 import React from 'react'
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import BaseMap from './layer/BaseMap'
+import CSVFilelocal from './layer/CSVFilelocal'
+
+import L from 'leaflet';
+
+
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12.5, 20.5]
+});
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapContent = () => {
     return (
@@ -19,6 +34,7 @@ const MapContent = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <BaseMap />
+                <CSVFilelocal />
             </MapContainer>
         </div>
     )

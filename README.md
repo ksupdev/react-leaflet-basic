@@ -4,6 +4,7 @@
 ```shell
 npm i react-leaflet
 npm i leaflet
+npm i papaparse
 ```
 
 ## Base Map
