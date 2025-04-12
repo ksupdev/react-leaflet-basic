@@ -1,15 +1,18 @@
 //rafce
-import React, { useState, useRef } from 'react'
-import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
-import BaseMap from './layer/BaseMap'
-import CSVFilelocal from './layer/CSVFilelocal'
-import AircraftCSV from './layer/AircraftCSV'
+import React, { useState, useRef } from 'react';
+import { MapContainer, Marker, Tooltip, TileLayer, useMap } from 'react-leaflet';
+import BaseMap from './layer/BaseMap';
+import CSVFilelocal from './layer/CSVFilelocal';
+import AircraftCSV from './layer/AircraftCSV';
+
+
 
 import L from 'leaflet';
-
+import 'leaflet-rotatedmarker';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import iconAir from 'leaflet/dist/images/air3.png';
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -17,6 +20,15 @@ let DefaultIcon = L.icon({
     iconSize: [25, 41],
     iconAnchor: [12.5, 20.5]
 });
+
+let airMarker = L.icon({
+    iconUrl: iconAir,
+    shadowUrl: iconShadow,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10]
+});
+
+
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapContent = () => {
@@ -36,7 +48,7 @@ const MapContent = () => {
     }
 
 
-    // console.log('Hello', aircraft);
+    console.log('Hello', aircraft);
 
     return (
         <div>
@@ -56,7 +68,12 @@ const MapContent = () => {
                 />
                 <BaseMap />
                 <CSVFilelocal />
-                {aircraft && aircraft.map((item, index) => <Marker key={index} position={[item.latitude, item.longitude]}></Marker>)}
+                {aircraft && aircraft.map((item, index) =>
+                    <Marker icon={airMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
+                        <Tooltip>
+                            angle: {item.angle}
+                        </Tooltip>
+                    </Marker>)}
             </MapContainer>
         </div>
     )

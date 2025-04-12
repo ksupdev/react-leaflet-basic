@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Papa from 'papaparse';
+import * as turf from '@turf/turf';
 
 
 const AircraftCSV = ({ setAircraft, focusTo }) => {
@@ -15,6 +16,16 @@ const AircraftCSV = ({ setAircraft, focusTo }) => {
             return acc;
         }, {});
         return groupedData
+    }
+
+    function addBearing(data) {
+        // Calculate icon rotate
+        for (let i = 0; i < data.length - 1; i++) {
+            const from = [parseFloat(data[i].longitude), parseFloat(data[i].latitude)];
+            const to = [parseFloat(data[i + 1].longitude), parseFloat(data[i + 1].latitude)];
+            data[i].bearing = turf.bearing(from, to);
+        }
+        return data;
     }
 
     const handleSelectFile = (event) => {
@@ -46,13 +57,14 @@ const AircraftCSV = ({ setAircraft, focusTo }) => {
         });
     }
 
-    const handleSelect = (event) => {
+    const handleSelect = async (event) => {
         // console.log(event.target.value);
         const callSign = event.target.value;
         //console.log(data[callSign]);
+        const newData = addBearing(data[callSign]);
 
-        setAircraft(data[callSign]);
-        focusTo(data[callSign]);
+        setAircraft(newData);
+        focusTo(newData);
 
     }
 

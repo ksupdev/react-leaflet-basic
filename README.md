@@ -5,13 +5,39 @@
 npm i react-leaflet
 npm i leaflet
 npm i papaparse
+npm i leaflet-rotatedmarker
+npm i @turf/turf
 ```
 
 ## Base Map
 
 - https://leaflet-extras.github.io/leaflet-providers/preview/
 
+## Create Marker
 
+- copy public/assets/air3.png to node_modules/leaflet/dist/images
+
+## Lib noted
+- https://turfjs.org/
+
+
+## Noted
+
+### flight data
+- You can use this find for upload the flight data `external-source/dump1090-127_0_0_1-170911.csv`
+
+### iconAnchor
+```js
+let airMarker = L.icon({
+    iconUrl: iconAir,
+    shadowUrl: iconShadow,
+    iconSize: [20, 25], // width, height in pixels
+    iconAnchor: [10, 12.5] // anchor point relative to icon's top-left
+});
+
+```
+
+- 'iconAnchor' In Leaflet, iconAnchor is a property of the L.Icon class that determines where the icon's "tip" or "anchor point" is positioned relative to its top-left corner. This property is crucial for properly positioning markers on the map.
 
 
 
