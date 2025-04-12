@@ -4,6 +4,7 @@ import { MapContainer, Marker, Tooltip, TileLayer, useMap } from 'react-leaflet'
 import BaseMap from './layer/BaseMap';
 import CSVFilelocal from './layer/CSVFilelocal';
 import AircraftCSV from './layer/AircraftCSV';
+import RouteAircraft from './layer/RouteAircraft';
 
 
 
@@ -48,7 +49,7 @@ const MapContent = () => {
     }
 
 
-    console.log('Hello', aircraft);
+   // console.log('Hello', aircraft);
 
     return (
         <div>
@@ -62,7 +63,7 @@ const MapContent = () => {
                 center={[13, 100]}
                 zoom={6}
                 scrollWheelZoom={true}>
-                <TileLayer
+                <TileLayer max
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
@@ -74,6 +75,7 @@ const MapContent = () => {
                             angle: {item.angle}
                         </Tooltip>
                     </Marker>)}
+                <RouteAircraft aircraft={aircraft} />
             </MapContainer>
         </div>
     )
