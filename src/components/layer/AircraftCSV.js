@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Papa from 'papaparse';
 
 
-const AircraftCSV = ({ setAircraft }) => {
+const AircraftCSV = ({ setAircraft, focusTo }) => {
     const [data, setData] = useState(null);
 
     function groupKey(data) {
@@ -20,6 +20,10 @@ const AircraftCSV = ({ setAircraft }) => {
     const handleSelectFile = (event) => {
         //console.log(event.target.files[0]);
         const file = event.target.files[0];
+        if (!file) {
+            console.log('No file');
+            return;
+        }
         Papa.parse(file, {
             header: true, complete: (results) => {
 
@@ -48,6 +52,7 @@ const AircraftCSV = ({ setAircraft }) => {
         //console.log(data[callSign]);
 
         setAircraft(data[callSign]);
+        focusTo(data[callSign]);
 
     }
 

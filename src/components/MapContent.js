@@ -1,5 +1,5 @@
 //rafce
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
 import BaseMap from './layer/BaseMap'
 import CSVFilelocal from './layer/CSVFilelocal'
@@ -20,13 +20,29 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapContent = () => {
+
+    const mapRef = useRef();
     const [aircraft, setAircraft] = useState(null);
-    console.log('Hello', aircraft);
+
+
+    function focusTo(objects) {
+        const bounds = objects.reduce(
+            function (acc, cur) {
+                return acc.extend([cur.latitude, cur.longitude]);
+            },
+            L.latLngBounds()
+        );
+        mapRef.current.fitBounds(bounds);
+    }
+
+
+    // console.log('Hello', aircraft);
 
     return (
         <div>
-            <AircraftCSV setAircraft={setAircraft} />
+            <AircraftCSV setAircraft={setAircraft} focusTo={focusTo} />
             <MapContainer
+                ref={mapRef}
                 style={{
                     width: '100%',
                     height: '100vh'
