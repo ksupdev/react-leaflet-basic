@@ -39,6 +39,11 @@ let airMarker = L.icon({
 
 - 'iconAnchor' In Leaflet, iconAnchor is a property of the L.Icon class that determines where the icon's "tip" or "anchor point" is positioned relative to its top-left corner. This property is crucial for properly positioning markers on the map.
 
+## Location data
+- https://github.com/prasertcbs/thailand_gis/tree/main/province
+- https://github.com/prasertcbs/thailand_gis/blob/main/province/province_simplify.json
+- Web สำหรับแปลงข้อมูล `https://geojson.io/#map=4.93/13.05/101.49`
+
 
 
 

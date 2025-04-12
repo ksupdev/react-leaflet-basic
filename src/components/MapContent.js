@@ -5,6 +5,7 @@ import BaseMap from './layer/BaseMap';
 import CSVFilelocal from './layer/CSVFilelocal';
 import AircraftCSV from './layer/AircraftCSV';
 import RouteAircraft from './layer/RouteAircraft';
+import Province from './layer/Province';
 
 
 
@@ -14,6 +15,7 @@ import 'leaflet-rotatedmarker';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import iconAir from 'leaflet/dist/images/air3.png';
+
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -49,7 +51,7 @@ const MapContent = () => {
     }
 
 
-   // console.log('Hello', aircraft);
+    // console.log('Hello', aircraft);
 
     return (
         <div>
@@ -76,6 +78,7 @@ const MapContent = () => {
                         </Tooltip>
                     </Marker>)}
                 <RouteAircraft aircraft={aircraft} />
+                <Province />
             </MapContainer>
         </div>
     )
