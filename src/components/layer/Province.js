@@ -44,7 +44,14 @@ const Province = () => {
 
         let popupContent = '';
         for (const [key, val] of Object.entries(prop)) {
-            popupContent += key + ': ' + val + '<br/>';
+
+            let testImage = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-_AC2Gj_By0e3bZmq2V_jWIqyPM9oJ2DaUQ&s';
+            if (key == 'REGION6') {
+                popupContent += "<img style='max-width:100%' src ='" + testImage + "' />";
+            } else {
+                popupContent += key + ': ' + val + '<br/>';
+            }
+
         }
 
         layer.bindPopup(popupContent);
