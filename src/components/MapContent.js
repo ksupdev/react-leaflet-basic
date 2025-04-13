@@ -44,6 +44,7 @@ let firmMarker = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapContent = () => {
+    const isShowFirmData = false;
 
     const mapRef = useRef();
     const [aircraft, setAircraft] = useState(null);
@@ -65,7 +66,7 @@ const MapContent = () => {
 
     return (
         <div>
-            <FirmNasa setFirm={setFirm} />
+
             <AircraftCSV setAircraft={setAircraft} focusTo={focusTo} />
             <MapContainer
                 ref={mapRef}
@@ -88,19 +89,28 @@ const MapContent = () => {
                             angle: {item.angle}
                         </Tooltip>
                     </Marker>)}
-                {firm && firm.map((item, index) =>
-                    <Marker icon={firmMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
-                        <Tooltip>
-                            {
-                                Object.keys(item).map(key =>
-                                    <div>
-                                        <b>{key}</b>: {item[key]}
-                                    </div>
-                                )
-                            }
+                {(isShowFirmData === true) && (
+                    <>
+                        <FirmNasa setFirm={setFirm} />
+                        {firm && firm.map((item, index) =>
+                            <Marker icon={firmMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
+                                <Tooltip>
+                                    {
+                                        Object.keys(item).map(key =>
+                                            <div>
+                                                <b>{key}</b>: {item[key]}
+                                            </div>
+                                        )
+                                    }
 
-                        </Tooltip>
-                    </Marker>)}
+                                </Tooltip>
+                            </Marker>)}
+                    </>
+                )}
+
+
+
+
 
                 <RouteAircraft aircraft={aircraft} />
                 <Province />
