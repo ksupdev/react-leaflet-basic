@@ -16,6 +16,7 @@ npm i @turf/turf
 ## Create Marker
 
 - copy public/assets/air3.png to node_modules/leaflet/dist/images
+- copy public/assets/fire.gif to node_modules/leaflet/dist/images/fire.gif
 
 ## Lib noted
 - https://turfjs.org/

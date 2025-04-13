@@ -6,6 +6,7 @@ import CSVFilelocal from './layer/CSVFilelocal';
 import AircraftCSV from './layer/AircraftCSV';
 import RouteAircraft from './layer/RouteAircraft';
 import Province from './layer/Province';
+import FirmNasa from './layer/FirmNasa';
 
 
 
@@ -15,6 +16,7 @@ import 'leaflet-rotatedmarker';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import iconAir from 'leaflet/dist/images/air3.png';
+import iconFirm from 'leaflet/dist/images/fire.gif';
 
 
 let DefaultIcon = L.icon({
@@ -31,6 +33,13 @@ let airMarker = L.icon({
     iconAnchor: [10, 10]
 });
 
+let firmMarker = L.icon({
+    iconUrl: iconFirm,
+    shadowUrl: iconShadow,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10]
+});
+
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -38,6 +47,7 @@ const MapContent = () => {
 
     const mapRef = useRef();
     const [aircraft, setAircraft] = useState(null);
+    const [firm, setFirm] = useState(null);
 
 
     function focusTo(objects) {
@@ -55,6 +65,7 @@ const MapContent = () => {
 
     return (
         <div>
+            <FirmNasa setFirm={setFirm} />
             <AircraftCSV setAircraft={setAircraft} focusTo={focusTo} />
             <MapContainer
                 ref={mapRef}
@@ -77,6 +88,13 @@ const MapContent = () => {
                             angle: {item.angle}
                         </Tooltip>
                     </Marker>)}
+                {firm && firm.map((item, index) =>
+                    <Marker icon={firmMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
+                        {/* <Tooltip>
+                            angle: {item.angle}
+                        </Tooltip> */}
+                    </Marker>)}
+
                 <RouteAircraft aircraft={aircraft} />
                 <Province />
             </MapContainer>
