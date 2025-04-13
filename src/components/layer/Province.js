@@ -3,12 +3,12 @@ import React from 'react'
 import { GeoJSON } from 'react-leaflet';
 
 import data from '../data/province.json'
+import { feature } from '@turf/turf';
 
 const Province = () => {
 
     const geoStyle = (feature) => {
         const region = feature.properties.REGION6;
-        console.log(region);
         if (region == 'ภาคกลาง') {
             return {
                 weight: 1,
@@ -30,15 +30,29 @@ const Province = () => {
                 fillColor: 'yellow',
                 fillOpacity: 0.3
             }
-        } else{
+        } else {
             return {
                 weight: 1
             }
         }
     }
 
-    return data && <GeoJSON data={data}
+    const handleEachFeature = (feature, layer) => {
+        // code
+        console.log(feature.properties);
+        layer.bindTooltip(feature.properties.ADM1_TH, {
+            direction: 'right',
+            // permanent: true
+        });
+
+
+
+    }
+
+    return data && <GeoJSON
+        data={data}
         style={geoStyle}
+        onEachFeature={handleEachFeature}
     />;
 }
 
