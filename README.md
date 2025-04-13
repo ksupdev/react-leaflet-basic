@@ -45,6 +45,9 @@ let airMarker = L.icon({
 - https://github.com/prasertcbs/thailand_gis/blob/main/province/province_simplify.json
 - Web สำหรับแปลงข้อมูล `https://geojson.io/#map=4.93/13.05/101.49`
 
+## Change Icon
+- https://www.flaticon.com/free-icon/map_717498?term=map&page=1&position=28&origin=search&related_id=717498
+
 
 
 

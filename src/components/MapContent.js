@@ -1,6 +1,14 @@
 //rafce
 import React, { useState, useRef } from 'react';
-import { MapContainer, Marker, Tooltip, TileLayer, useMap } from 'react-leaflet';
+import {
+    MapContainer,
+    Marker,
+    Tooltip,
+    TileLayer,
+    useMap,
+    LayersControl,
+    LayerGroup,
+} from 'react-leaflet';
 import BaseMap from './layer/BaseMap';
 import CSVFilelocal from './layer/CSVFilelocal';
 import AircraftCSV from './layer/AircraftCSV';
@@ -17,6 +25,8 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import iconAir from 'leaflet/dist/images/air3.png';
 import iconFirm from 'leaflet/dist/images/fire.gif';
+
+import './map.css';
 
 
 let DefaultIcon = L.icon({
@@ -81,39 +91,58 @@ const MapContent = () => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <BaseMap />
-                <CSVFilelocal />
-                {aircraft && aircraft.map((item, index) =>
-                    <Marker icon={airMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
-                        <Tooltip>
-                            angle: {item.angle}
-                        </Tooltip>
-                    </Marker>)}
-                {(isShowFirmData === true) && (
-                    <>
-                        <FirmNasa setFirm={setFirm} />
-                        {firm && firm.map((item, index) =>
-                            <Marker icon={firmMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
-                                <Tooltip>
-                                    {
-                                        Object.keys(item).map(key =>
-                                            <div>
-                                                <b>{key}</b>: {item[key]}
-                                            </div>
-                                        )
-                                    }
+                <LayersControl>
+                    <BaseMap />
 
-                                </Tooltip>
-                            </Marker>)}
-                    </>
-                )}
+                    <LayersControl.Overlay name='Airport'>
+                        <LayerGroup>
+                            <CSVFilelocal />
+                        </LayerGroup>
+                    </LayersControl.Overlay>
 
+                    <LayersControl.Overlay name='Aircraft'>
+                        <LayerGroup>
+                            {aircraft && aircraft.map((item, index) =>
+                                <Marker icon={airMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
+                                    <Tooltip>
+                                        angle: {item.angle}
+                                    </Tooltip>
+                                </Marker>)}
 
+                            <RouteAircraft aircraft={aircraft} />
+                        </LayerGroup>
+                    </LayersControl.Overlay>
 
+                    <LayersControl.Overlay name='Firm'>
+                        <LayerGroup>
+                            {(isShowFirmData === true) && (
+                                <>
+                                    <FirmNasa setFirm={setFirm} />
+                                    {firm && firm.map((item, index) =>
+                                        <Marker icon={firmMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
+                                            <Tooltip>
+                                                {
+                                                    Object.keys(item).map(key =>
+                                                        <div>
+                                                            <b>{key}</b>: {item[key]}
+                                                        </div>
+                                                    )
+                                                }
 
+                                            </Tooltip>
+                                        </Marker>)}
+                                </>
+                            )}
+                        </LayerGroup>
+                    </LayersControl.Overlay>
 
-                <RouteAircraft aircraft={aircraft} />
-                <Province />
+                    <LayersControl.Overlay name='Province'>
+                        <LayerGroup>
+                            <Province />
+                        </LayerGroup>
+                    </LayersControl.Overlay>
+
+                </LayersControl>
             </MapContainer>
         </div>
     )
