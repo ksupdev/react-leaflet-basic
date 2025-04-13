@@ -48,6 +48,55 @@ let airMarker = L.icon({
 ## Change Icon
 - https://www.flaticon.com/free-icon/map_717498?term=map&page=1&position=28&origin=search&related_id=717498
 
+## Install Tailwind
+
+### Install Tailwind CSS
+
+```shell
+npm install tailwindcss @tailwindcss/cli
+
+```
+
+```shell
+## src/index.css
+
+@import "tailwindcss";
+
+```
+
+```shell
+
+npx @tailwindcss/cli -i ./src/index.css -o ./src/output.css --watch
+
+```
+
+```shell
+
+## import './output.css';
+
+import logo from './logo.svg';
+import MapContent from './components/MapContent';
+import './output.css';
+import './App.css';
+
+import 'leaflet/dist/leaflet.css';
+
+function App() {
+  return (
+    <>
+      <MapContent />
+    </>
+  );
+}
+
+export default App;
+
+
+```
+
+
+
+
 
 
 
