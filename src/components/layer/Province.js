@@ -37,12 +37,28 @@ const Province = () => {
         }
     }
 
+    const handleClickFeature = (event) => {
+
+        const layer = event.target;
+        const prop = event.target.feature.properties;
+
+        let popupContent = '';
+        for (const [key, val] of Object.entries(prop)) {
+            popupContent += key + ': ' + val + '<br/>';
+        }
+
+        layer.bindPopup(popupContent);
+    }
+
     const handleEachFeature = (feature, layer) => {
         // code
-        console.log(feature.properties);
+        // console.log(feature.properties);
         layer.bindTooltip(feature.properties.ADM1_TH, {
             direction: 'right',
             // permanent: true
+        });
+        layer.on({
+            'click': handleClickFeature
         });
 
 
