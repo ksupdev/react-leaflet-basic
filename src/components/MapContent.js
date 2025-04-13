@@ -90,9 +90,16 @@ const MapContent = () => {
                     </Marker>)}
                 {firm && firm.map((item, index) =>
                     <Marker icon={firmMarker} rotationAngle={item.bearing} key={index} position={[item.latitude, item.longitude]}>
-                        {/* <Tooltip>
-                            angle: {item.angle}
-                        </Tooltip> */}
+                        <Tooltip>
+                            {
+                                Object.keys(item).map(key =>
+                                    <div>
+                                        <b>{key}</b>: {item[key]}
+                                    </div>
+                                )
+                            }
+
+                        </Tooltip>
                     </Marker>)}
 
                 <RouteAircraft aircraft={aircraft} />
