@@ -1,5 +1,10 @@
 # Getting Started with Create React App
 
+## Create project
+```shell
+npx create-react-app client
+```
+
 ## Install lib list
 ```shell
 npm i react-leaflet
@@ -64,7 +69,9 @@ npm install tailwindcss @tailwindcss/cli
 
 ```
 
+
 ```shell
+# You need to run this command every time you code to generate and update the CSS.
 
 npx @tailwindcss/cli -i ./src/index.css -o ./src/output.css --watch
 
