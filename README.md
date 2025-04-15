@@ -101,6 +101,38 @@ export default App;
 
 ```
 
+## Run GEO servier
+
+```shell
+docker compose -f geoserver/docker-compose.yml up -d
+
+```
+- access with http://localhost:8080/geoserver/web/?0 `user and password store on docker-compose file
+
+![Screenshot](external-source/readme-images/local-geoserver.png)
+
+### Create woekspace
+
+- create workspace
+
+![Screenshot](external-source/readme-images/create-work-space.png)
+
+- Click edit `Map50K_WMS`, and then select `WMS` on Services Sections
+
+![Screenshot](external-source/readme-images/edit-workspace.png)
+
+### Create new Store
+Go to menu `Stores`
+
+- Click `Add new Store` and select `GeoTIFF`
+
+![Screenshot](external-source/readme-images/new-data-source-01.png)
+
+
+puza-th-01
+p?c4bM_-Xb!Di%y
+
+
 
 
 
